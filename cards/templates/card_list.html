@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Index{% endblock %}
+
+{% block content %}
+    <style type="text/css">
+    	img {
+		    height: auto; 
+		    width: auto; 
+		    max-width: 100px; 
+		    max-height: 100px;
+		}
+    </style>
+	<h1>Cards</h1>
+	<a href="{% url 'card_create' %}">New</a>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Image</th>
+				<th>Name</th>
+				<th>Actions</th>
+			</tr>	
+		</thead>
+		<tbody>
+			{% for card in cards %}
+			    <tr>
+			    	<td class="align-middle"><img src="{{ card.url }}"></td>
+			        <td class="align-middle">{{ card.name }}</td>
+			        <td class="align-middle">
+			        	<a href="{% url 'card_update' card.id %}">Edit</a>
+			            <a href="{% url 'card_delete' card.id %}">Delete</a>
+			        </td>
+			    </tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}

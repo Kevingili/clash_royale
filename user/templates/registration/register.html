@@ -1,0 +1,24 @@
+{% extends "../base.html" %}
+{% block title %}Login{% endblock %}
+{% block content %}
+	{% if next %}
+	<p>Page interdite</p>
+	{% endif %}
+
+	<h1>Register</h1>
+	<form method="post" action="{% url 'register' %}">
+
+		{% csrf_token %}
+
+		{% if form.errors %}
+		<p>Errors</p>
+		{% endif %}
+
+		<p>Username: {{ form.username }}</p>
+		<p>Password: {{ form.password1 }}</p>
+		<p>Password Confirmation: {{ form.password2 }}</p>
+
+		<input type="submit" name="Register" class="btn btn-primary">
+	</form>
+
+{% endblock %}
