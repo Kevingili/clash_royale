@@ -6,7 +6,7 @@ Application in python (django) about clash royale's cards
 
 ```bash
 python manage.py migrate
-python3 manage.py runserver
+python manage.py runserver
 ```
 
 You can go on : http://127.0.0.1:8000/register to create a new user to add cards.
