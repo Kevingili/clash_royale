@@ -7,10 +7,7 @@
 
 
 	{% if user.is_authenticated %}
-	<h2>Your name is: {{ user.username }}</h2>
-	<a href="{% url 'deconnexion' %}">Se deconnecter</a>
-	{% else %}
-	<h2>You are not logged in</h2>
-	<a href="{% url 'login' %}">Se connecter</a>
+		<h2>Your name is: {{ user.username }}</h2>
+		<a href="{% url 'deconnexion' %}">Se deconnecter</a>
 	{% endif %}
 {% endblock %}

@@ -3,7 +3,10 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 
 def index(request):
-	return render(request, 'user/index.html')
+	if not request.user.is_authenticated:
+		return redirect('login')
+	else:
+		return render(request, 'user/index.html')
 
 def register(request):
 
@@ -22,5 +25,5 @@ def register(request):
 	return render(request, 'registration/register.html', context)
 
 def deconnexion(request):
-    logout(request)
-    return redirect('index')
+	logout(request)
+	return redirect('index')
