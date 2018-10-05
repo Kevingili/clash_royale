@@ -4,4 +4,4 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 class MyUser(AbstractUser):
-    test = models.IntegerField(default=200)
+    gold = models.IntegerField(default=200)

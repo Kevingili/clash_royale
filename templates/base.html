@@ -43,15 +43,15 @@
 
           {% if user.is_authenticated %}
           <li class="nav-item">
-            <a class="nav-link" href="#">Shop</a>
+            <a class="nav-link" href="{% url 'show_shop' %}">Shop</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/cards/">List of Cards</a>
+            <a class="nav-link" href="{% url 'card_list' %}">List of Cards</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My account</a>
             <div class="dropdown-menu" aria-labelledby="dropdown01">
-              <a class="dropdown-item" href="#">My deck</a>
+              <a class="dropdown-item" href="{% url 'my_card_list' %}">My cards</a>
               <a class="dropdown-item" href="#">Another action</a>
               <a class="dropdown-item" href="#">Something else here</a>
             </div>
@@ -61,6 +61,7 @@
 
         {% if user.is_authenticated %}
         <div class="form-inline my-2 my-lg-0" style="margin-right: 50px;">
+          <span style="color: white;"><strong>{{ user.gold }} </strong></span> <img src="https://cdn3.iconfinder.com/data/icons/fatcow/32/coins.png">
           <div class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ user.username }}</a>
             <div class="dropdown-menu" aria-labelledby="dropdown01">

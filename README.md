@@ -6,6 +6,7 @@ Application in python (django) about clash royale's cards
 
 ```bash
 python manage.py migrate
+python3 manage.py loaddata db.json
 python manage.py runserver
 ```
 

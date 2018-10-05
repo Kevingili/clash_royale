@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Index{% endblock %}
+
+{% block content %}
+    <style type="text/css">
+    	img {
+		    height: auto; 
+		    width: auto; 
+		    max-width: 100px; 
+		    max-height: 100px;
+		}
+    </style>
+	<h1>Shop</h1>
+	<p>Do you want to buy one new card ? If you do, you will get one random card</p>
+	<form action="" method="post">
+		{% csrf_token %}
+		<button type="submit" class="btn btn-primary">Buy</button>
+	</form>
+	
+	{% if card %}
+		<p>Random card : <img src="{{card.url}}"></p>
+	{% endif %}
+
+{% endblock %}
