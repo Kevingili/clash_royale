@@ -3,6 +3,7 @@ from django.forms import ModelForm
 from cards.models import Card
 from django import forms
 from user.models import MyUser
+from django.contrib.auth.decorators import login_required
 
 class CardForm(ModelForm):
 	class Meta:
@@ -10,18 +11,23 @@ class CardForm(ModelForm):
 		#fields = ['name', 'url', 'description']
 		fields = "__all__" 
 
+@login_required
 def card_list(request):
-	if not request.user.is_authenticated:
-		return redirect('login')
-	else:
-		cards = Card.objects.all()
-		return render(request, 'card_list.html', {'cards': cards})
+	cards = Card.objects.all()
+	return render(request, 'card_list.html', {'cards': cards})
 
 def show_shop(request):
 	if request.method == 'POST':
-		card = Card.objects.order_by('?').first()
-		card.users.add(request.user)
-		return render(request, 'shop.html', {'card': card})
+		u1 = request.user
+		if(u1.gold > 0):
+			card = Card.objects.order_by('?').first()
+			card.users.add(request.user)
+			u1.gold = u1.gold - 50
+			u1.save()
+			return render(request, 'shop.html', {'card': card})
+		else:
+			error = "You don't have enough money"
+			return render(request, 'shop.html', {'error': error})
 	else:
 		return render(request, 'shop.html')
 

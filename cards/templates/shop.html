@@ -13,13 +13,18 @@
     </style>
 	<h1>Shop</h1>
 	<p>Do you want to buy one new card ? If you do, you will get one random card</p>
+
+	{% if error %}
+		<p>{{ error }}</p>
+	{% endif %}
+
 	<form action="" method="post">
 		{% csrf_token %}
-		<button type="submit" class="btn btn-primary">Buy</button>
+		<img src="https://cdn.statsroyale.com/images/feature-chests.png?v=2"> --> <button type="submit" class="btn btn-primary">Buy for 50 coins</button>
 	</form>
 	
 	{% if card %}
-		<p>Random card : <img src="{{card.url}}"></p>
+		<p>Congratulations you get : <img src="{{card.url}}"></p>
 	{% endif %}
 
 {% endblock %}

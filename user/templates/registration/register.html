@@ -6,12 +6,13 @@
 	{% endif %}
 
 	<h1>Register</h1>
+	<p>If you don't have already an account you can log in <a href="{% url 'login' %}">here</a></p>
 	<form method="post" action="{% url 'register' %}">
 
 		{% csrf_token %}
 
 		{% if form.errors %}
-		<p>Errors</p>
+		<p>{{ form.errors }}</p>
 		{% endif %}
 
 		<p>Username: {{ form.username }}</p>
