@@ -4,6 +4,7 @@ from cards.models import Card
 from django import forms
 from user.models import MyUser
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
 class CardForm(ModelForm):
 	class Meta:
@@ -13,8 +14,13 @@ class CardForm(ModelForm):
 
 @login_required
 def card_list(request):
-	cards = Card.objects.all()
-	return render(request, 'card_list.html', {'cards': cards})
+	card_list = Card.objects.all()
+	paginator = Paginator(card_list, 2)
+
+	page = request.GET.get('page')
+	cards = paginator.get_page(page)
+
+	return render(request, 'card_list.html', {'cards': cards, 'range': range(paginator.num_pages)})
 
 def show_shop(request):
 	if request.method == 'POST':
