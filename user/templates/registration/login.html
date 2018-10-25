@@ -1,7 +1,8 @@
 {% extends "../base.html" %}
+{% load crispy_forms_tags %}
 {% block title %}Login{% endblock %}
 {% block content %}
-	<img src="https://upload.wikimedia.org/wikipedia/fr/thumb/5/59/Clash_Royale_Logo.PNG/800px-Clash_Royale_Logo.PNG">
+	<!-- <img src="https://upload.wikimedia.org/wikipedia/fr/thumb/5/59/Clash_Royale_Logo.PNG/800px-Clash_Royale_Logo.PNG"> -->
     <h1>Login</h1>
 
 	{% if next %}
@@ -13,7 +14,7 @@
 
 	<form role="form" class="form-horizontal" method="post" action="{% url 'login' %}">
 		{% csrf_token %}
-		{{form}}
+		{{form|crispy}}
 	    <input type="submit" name="Login" class="btn btn-primary">
 	</form>
 {% endblock %}

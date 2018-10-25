@@ -30,26 +30,24 @@
 
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'index' %}">Home</a>
           </li>
 
           {% if not user.is_authenticated %}{% endif %}
-
 
           {% if user.is_authenticated %}
           <li class="nav-item">
             <a class="nav-link" href="{% url 'show_shop' %}">Shop</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'card_list' %}">List of Cards</a>
+            <a class="nav-link" href="{% url 'card_list' %}">Cards</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My account</a>
             <div class="dropdown-menu" aria-labelledby="dropdown01">
               <a class="dropdown-item" href="{% url 'my_card_list' %}">My cards</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
+              <a class="dropdown-item" href="#">My deck</a>
             </div>
           </li>
         </ul>
@@ -61,7 +59,7 @@
           <div class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ user.username }}</a>
             <div class="dropdown-menu" aria-labelledby="dropdown01">
-              <a class="dropdown-item" href="{% url 'deconnexion' %}">Se deconnecter</a>
+              <a class="dropdown-item" href="{% url 'deconnexion' %}">Logout</a>
             </div>
           </div>
         </div>

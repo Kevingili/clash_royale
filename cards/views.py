@@ -9,7 +9,10 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 class CardForm(ModelForm):
 	class Meta:
 		model = Card
-		#fields = ['name', 'url', 'description']
+		widgets = {
+          'description': forms.Textarea(attrs={'rows':4, 'placeholder':'Description de la carte'}),
+        }
+		#fields = ['name', 'url', 'description', 'users']
 		fields = "__all__" 
 
 @login_required

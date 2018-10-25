@@ -1,11 +1,14 @@
 {% extends "base.html" %}
 
+{% load crispy_forms_tags %}
+
 {% block title %}Index{% endblock %}
 
 {% block content %}
 	<h1>Create Cards</h1>
 	<form method="post">{% csrf_token %}
-	    {{ form.as_p }}
-	    <input type="submit" value="Submit" />
+	    {{ form|crispy}}
+	    <button type="submit" class="btn btn-primary" value="Submit">Enregistrer</button>
 	</form>
+	<br>
 {% endblock %}
