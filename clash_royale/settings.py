@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'user',
     'cards',
+    'deck',
     'bootstrap4',
     'crispy_forms',
     'django.contrib.admin',

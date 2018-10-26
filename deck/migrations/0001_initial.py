@@ -8,16 +8,16 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
+        ('cards', '0001_initial'),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Card',
+            name='Deck',
             fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False)),
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=100)),
-                ('description', models.TextField(null=True)),
-                ('url', models.CharField(max_length=100)),
+                ('cards', models.ManyToManyField(to='cards.Card')),
             ],
         ),
     ]
