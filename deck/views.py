@@ -34,7 +34,10 @@ def deck_create(request):
 				form.save()
 				return redirect('deck_list')
 		else:
+			#form = DeckForm()
 			form = DeckForm()
+			form.fields["user"].initial = [request.user.id]
+			form.fields["cards"].queryset = request.user.card_set.all()
 		return render(request, 'deck_create.html', {'form': form})
 
 def deck_update(request, id_deck):
