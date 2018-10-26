@@ -7,3 +7,6 @@ class Card(models.Model):
     description = models.TextField(null=True)
     url = models.CharField(max_length=100)
     users = models.ManyToManyField(MyUser)
+
+    def __str__(self):
+    	return self.name

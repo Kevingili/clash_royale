@@ -1,1 +1,31 @@
-<h1>deck</h1>
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}Deck List{% endblock %}
+
+{% block content %}
+	<h1>deck</h1>
+	<a href="{% url 'deck_create' %}">New</a>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>User</th>
+				<th>Actions</th>
+			</tr>	
+		</thead>
+		<tbody>
+			{% for deck in decks %}
+			    <tr>
+			    	<td class="align-middle"><a href="{% url 'show_deck' deck.id %}">{{ deck.name }}</a></td>
+			        <td class="align-middle">{{ deck.user }}</td>
+			        <td class="align-middle">
+			        	<a href="{% url 'deck_update' deck.id %}">Edit</a>
+			            <a href="{% url 'deck_delete' deck.id %}">Delete</a>
+			        </td>
+			    </tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}

@@ -59,6 +59,7 @@ def card_create(request):
 	if not request.user.is_authenticated:
 		return redirect('login')
 	else:
+		action = "Create"
 		if request.POST:
 			form = CardForm(request.POST)
 			if form.is_valid():
@@ -66,7 +67,7 @@ def card_create(request):
 				return redirect('card_list')
 		else:
 			form = CardForm()
-		return render(request, 'card_create.html', {'form': form})
+		return render(request, 'card_create.html', {'form': form, 'action': action})
 
 
 def card_update(request, id_card):
@@ -75,10 +76,11 @@ def card_update(request, id_card):
 	else:
 		card = get_object_or_404(Card, id=id_card)
 		form = CardForm(request.POST or None, instance=card)
+		action = "Update"
 		if form.is_valid():
 			form.save()
 			return redirect('card_list')
-		return render(request, "card_create.html", {'form': form})
+		return render(request, "card_create.html", {'form': form, 'action': action})
 
 
 def card_delete(request, id_card):

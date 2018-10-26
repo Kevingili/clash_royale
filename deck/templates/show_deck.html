@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Show card{% endblock %}
+{% block title %}Show Deck{% endblock %}
 
 {% block content %}
     <style type="text/css">
@@ -11,7 +11,10 @@
 		    max-height: 150px;
 		}
     </style>
-	<h1>{{ card.name }}</h1>
-	<img src="{{ card.url }}">
-	<p>{{ card.description }}</p>
+	<h1>{{ deck.name }}</h1>
+	<p>{{ deck.user }}</p>
+	{% for card in deck.cards.all %}
+		{{ card.name }}<br>
+	{% endfor %}
+
 {% endblock %}
