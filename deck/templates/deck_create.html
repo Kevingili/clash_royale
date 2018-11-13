@@ -25,4 +25,15 @@
 	    <button type="submit" class="btn btn-primary" value="Submit">Enregistrer</button>
 	</form>
 	<br>
+	<script type="text/javascript">
+		$("select").change(function () {
+	      if($("select option:selected").length > 3) {
+	       console.log('bloquer')
+	       $("button[type=submit]").attr("disabled", "disabled");
+	      } else {
+	      	console.log('debloquer')
+	      	$("button[type=submit]").removeAttr("disabled");
+	      }
+	  	});
+	</script>
 {% endblock %}
