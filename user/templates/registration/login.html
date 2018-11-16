@@ -10,6 +10,7 @@
 	{% endif %}
 
 	<p>If you don't have account you can register <a href="{% url 'register' %}">here</a></p>
+	<p>If you forget your password you can click <a href="{% url 'password_reset' %}">here</a></p>
 	
 
 	<form role="form" class="form-horizontal" method="post" action="{% url 'login' %}">

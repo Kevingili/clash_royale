@@ -1,0 +1,13 @@
+{% extends "../base.html" %}
+
+{% block title %}Index{% endblock %}
+
+{% block content %}
+    <h1>Liste des joueurs</h1>
+    <ul>
+		{% for user in users %}
+			<li><a href="{% url 'show_player' user.id %}">{{ user.username }}</a></li>
+		{% endfor%}
+	</ul>
+	
+{% endblock %}

@@ -9,8 +9,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
-    <title>{% block title %}Base{% endblock %}</title>
+    <title>{% block title %}Base{% endblock %} | Clash royale</title>
 
     <style type="text/css">
     	body {
@@ -43,30 +45,47 @@
           <li class="nav-item">
             <a class="nav-link" href="{% url 'card_list' %}">Cards</a>
           </li>
+          {% if user.is_staff %}
           <li class="nav-item">
             <a class="nav-link" href="{% url 'deck_list' %}">Decks</a>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My account</a>
-            <div class="dropdown-menu" aria-labelledby="dropdown01">
-              <a class="dropdown-item" href="{% url 'my_card_list' %}">My cards</a>
-              <a class="dropdown-item" href="#">My deck</a>
-            </div>
+          {% endif %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'user_list' %}">Joueurs</a>
           </li>
         </ul>
         {% endif %}
 
-        {% if user.is_authenticated %}
-        <div class="form-inline my-2 my-lg-0" style="margin-right: 50px;">
-          <span style="color: white;"><strong>{{ user.gold }} </strong></span> <img src="https://cdn3.iconfinder.com/data/icons/fatcow/32/coins.png">
-          <div class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ user.username }}</a>
-            <div class="dropdown-menu" aria-labelledby="dropdown01">
-              <a class="dropdown-item" href="{% url 'deconnexion' %}">Logout</a>
-            </div>
-          </div>
-        </div>
-        {% endif %}    
+        <ul class="navbar-nav ml-auto">
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+              <span style="color: white;"><strong>{{ user.gold }} </strong></span> <img src="https://cdn3.iconfinder.com/data/icons/fatcow/32/coins.png">
+            </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" id="accountDropdownLink" data-toggle="dropdown">
+                        {{ user.username }}
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="accountDropdownLink">
+                        <a href="#" class="dropdown-item">Créer une annonce</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="{% url 'my_account' %}" class="dropdown-item">Mon compte</a>
+                        <a href="{% url 'my_card_list' %}" class="dropdown-item">Mes cartes</a>
+                        <a href="{% url 'my_deck_list' %}" class="dropdown-item">Mon deck</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="{% url 'deconnexion' %}" class="dropdown-item">Deconnexion</a>
+                    </div>
+
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Inscription</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Connexion</a>
+                </li>
+            {% endif %}
+
+        </ul> 
       </div>
     </nav>
 

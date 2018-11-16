@@ -5,8 +5,10 @@
 {% block title %}Deck List{% endblock %}
 
 {% block content %}
-	<h1>deck</h1>
-	<a href="{% url 'deck_create' %}">New</a>
+	<h1>Decks</h1>
+	{% if user.is_staff %}
+		<a href="{% url 'deck_create' %}">New</a>
+	{% endif %}
 	<table class="table table-striped">
 		<thead>
 			<tr>
@@ -21,8 +23,11 @@
 			    	<td class="align-middle"><a href="{% url 'show_deck' deck.id %}">{{ deck.name }}</a></td>
 			        <td class="align-middle">{{ deck.user }}</td>
 			        <td class="align-middle">
-			        	<a href="{% url 'deck_update' deck.id %}">Edit</a>
-			            <a href="{% url 'deck_delete' deck.id %}">Delete</a>
+			        	<a href="{% url 'show_deck' deck.id %}">Show</a>
+			        	{% if user.is_staff %}
+			        		<a href="{% url 'deck_update' deck.id %}">Edit</a>
+			            	<a href="{% url 'deck_delete' deck.id %}">Delete</a>
+			            {% endif %}
 			        </td>
 			    </tr>
 			{% endfor %}

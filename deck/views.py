@@ -3,6 +3,8 @@ from deck.models import Deck
 from deck.models import Card
 from django.forms import ModelForm
 from django import forms
+from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
 
 # Create your views here.
 
@@ -20,9 +22,18 @@ def show_deck(request, id_deck):
 		deck = Deck.objects.get(id=id_deck)
 		return render(request, 'show_deck.html', {'deck': deck})
 
+@staff_member_required
 def deck_list(request):
 	decks = Deck.objects.all()
 	return render(request, 'deck_list.html', {'decks': decks})
+
+def my_deck_list(request):
+	if not request.user.is_authenticated:
+		return redirect('login')
+	else:
+		u1 = request.user
+		deck = u1.deck
+		return render(request, 'my_deck_list.html', {'deck': deck})
 
 def deck_create(request):
 	if not request.user.is_authenticated:
@@ -46,6 +57,8 @@ def deck_update(request, id_deck):
 	else:
 		deck = get_object_or_404(Deck, id=id_deck)
 		form = DeckForm(request.POST or None, instance=deck)
+		form.fields["user"].initial = [request.user.id]
+		form.fields["cards"].queryset = request.user.card_set.all()
 		if form.is_valid():
 			form.save()
 			return redirect('deck_list')

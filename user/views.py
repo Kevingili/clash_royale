@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
+from user.models import MyUser
+from django.contrib.auth.decorators import login_required
 from .forms import MyCustomUserForm
 
 def index(request):
@@ -28,3 +30,18 @@ def register(request):
 def deconnexion(request):
 	logout(request)
 	return redirect('index')
+
+@login_required
+def user_list(request):
+	users = MyUser.objects.all()
+	return render(request, 'user/user_list.html', {'users': users})
+
+@login_required
+def show_player(request, id_user):
+	user = MyUser.objects.get(id=id_user)
+	return render(request, 'user/show_player.html', {'user': user})
+
+@login_required
+def my_account(request):
+	u1 = request.user
+	return render(request, 'user/my_account.html')

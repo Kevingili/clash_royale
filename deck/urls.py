@@ -8,4 +8,5 @@ urlpatterns = [
     path('show/<int:id_deck>', views.show_deck, name='show_deck'),
     path('update/<int:id_deck>', views.deck_update, name='deck_update'),
     path('delete/<int:id_deck>', views.deck_delete, name='deck_delete'),
+    path('mydeck', views.my_deck_list, name='my_deck_list'),
 ]

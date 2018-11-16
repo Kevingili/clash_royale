@@ -1,0 +1,10 @@
+{% extends "../base.html" %}
+
+{% block title %}My account{% endblock %}
+
+{% block content %}
+	<h1>Mon compte</h1>
+	<p>Pseudo : {{ user.username }}</p>
+	<p>Date d'inscription : {{ user.date_joined }}</p>
+	<p><a href="{% url 'password_change' %}" target="_blank">Changer de mot passe</a></p>
+{% endblock %}

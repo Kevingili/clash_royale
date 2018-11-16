@@ -5,10 +5,17 @@
 {% block title %}{{ action }} Card{% endblock %}
 
 {% block content %}
+
 	<h1>{{action}} Cards</h1>
 	<form method="post">{% csrf_token %}
 	    {{ form|crispy}}
 	    <button type="submit" class="btn btn-primary" value="Submit">Enregistrer</button>
 	</form>
-	<br>
+	<script type="text/javascript">
+      $(document).ready(function(){
+        $('select').select2();
+      })
+  </script>
+
 {% endblock %}
+

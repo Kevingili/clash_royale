@@ -18,7 +18,7 @@ class CardForm(ModelForm):
 @login_required
 def card_list(request):
 	card_list = Card.objects.all()
-	paginator = Paginator(card_list, 2)
+	paginator = Paginator(card_list, 10)
 
 	page = request.GET.get('page')
 	cards = paginator.get_page(page)

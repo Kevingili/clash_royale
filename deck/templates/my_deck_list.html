@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}Deck List{% endblock %}
+
+{% block content %}
+	<h1>Mon deck</h1>
+	<a href="{% url 'deck_update' deck.id %}" class="btn btn-warning">Edit</a>
+	<a href="{% url 'deck_delete' deck.id %}" class="btn btn-danger">Delete</a>
+	<p>Joueur : <strong>{{ deck.user }}</strong></p>
+	<p>Nom du deck : <strong>{{ deck.name }}</strong></p>
+	<p>Liste des cartes : </p>
+	<ul>
+		{% for card in deck.cards.all %}
+			<li><strong>{{ card.name }}</strong></li>
+		{% endfor %}
+	</ul>
+{% endblock %}

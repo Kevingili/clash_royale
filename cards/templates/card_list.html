@@ -12,7 +12,9 @@
 		}
     </style>
 	<h1>Cards</h1>
-	<a href="{% url 'card_create' %}">New</a>
+	{% if user.is_staff %}
+		<a href="{% url 'card_create' %}">New</a>
+	{% endif %}
 	<table class="table table-striped">
 		<thead>
 			<tr>
@@ -27,8 +29,11 @@
 			    	<td class="align-middle"><img src="{{ card.url }}"></td>
 			        <td class="align-middle"><a href="{% url 'show_card' card.id %}">{{ card.name }}</a></td>
 			        <td class="align-middle">
-			        	<a href="{% url 'card_update' card.id %}">Edit</a>
-			            <a href="{% url 'card_delete' card.id %}">Delete</a>
+			        	<a href="{% url 'show_card' card.id %}">Show</a>
+			        	{% if user.is_staff %}
+				        	<a href="{% url 'card_update' card.id %}">Edit</a>
+				            <a href="{% url 'card_delete' card.id %}" onclick="return confirm(`Etes vous sur de vouloir supprimer la carte`)">Delete</a>
+			            {% endif %}
 			        </td>
 			    </tr>
 			{% endfor %}
@@ -40,8 +45,6 @@
 	    <li class="page-item {% if not cards.has_previous %}disabled{% endif %}">
 	      <a class="page-link" href="{% if cards.has_previous %}?page={{ cards.previous_page_number }}{% endif %}">Previous</a>
 	    </li>
-
-
 
 		{% for i in range %}
 	    	<li class="page-item {% if cards.number == i|add:'1' %}active{% endif %}"><a class="page-link" href="?page={{i|add:'1'}}">{{i|add:'1'}}</a></li>
