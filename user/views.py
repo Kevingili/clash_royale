@@ -38,8 +38,9 @@ def user_list(request):
 
 @login_required
 def show_player(request, id_user):
-	user = MyUser.objects.get(id=id_user)
-	return render(request, 'user/show_player.html', {'user': user})
+	player = MyUser.objects.get(id=id_user)
+	cards = player.card_set.all()
+	return render(request, 'user/show_player.html', {'player': player, 'cards': cards})
 
 @login_required
 def my_account(request):

@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.forms import ModelForm
 from cards.models import Card
+from deck.models import Deck
+from deck.models import Exchange
 from django import forms
 from user.models import MyUser
 from django.contrib.auth.decorators import login_required
@@ -24,6 +26,37 @@ def card_list(request):
 	cards = paginator.get_page(page)
 
 	return render(request, 'card_list.html', {'cards': cards, 'range': range(paginator.num_pages)})
+
+
+
+@login_required
+def exchange(request, id_player):
+	if request.method == 'POST':
+		#print(int(request.POST.getlist("applicant_card")[0]))
+		
+		applicant = request.user
+		cards = applicant.card_set.all()
+		applicant_card = Card.objects.get(id=request.POST.getlist("applicant_card")[0])
+		validator_card = Card.objects.get(id=request.POST.getlist("validator_card")[0])
+		validator = MyUser.objects.get(id=id_player)
+		exchange = Exchange.create(applicant,applicant_card,validator,validator_card)
+		exchange.save()
+
+		return render(request, 'my_card_list.html', {'cards': cards})
+
+	else:
+		u1 = request.user
+		cards = u1.card_set.all()
+		player = MyUser.objects.get(id=id_player)
+		cards_player = player.card_set.all()
+		return render(request, 'exchange.html', {'cards': cards, 'cards_player': cards_player})
+
+@login_required
+def exchange_list(request):
+	exchanges = Exchange.objects.filter(applicant_id=request.user.id)
+	exchanges_other = Exchange.objects.filter(validator_id=request.user.id)
+	return render(request, 'exchange_list.html', {'exchanges': exchanges})
+
 
 def show_shop(request):
 	if request.method == 'POST':

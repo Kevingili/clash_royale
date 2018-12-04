@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Exchange{% endblock %}
+
+{% block content %}
+	<div class="container">
+		<h1>Liste des échanges</h1>
+
+		<h3>Demandes</h3>
+		<table class="table table-bordered">
+			<tr>
+				<td>Applicant</td>
+				<td>Applicant carte</td>
+				<td>Validator</td>
+				<td>Validator carte</td>
+				<td>Action</td>
+			</tr>
+			{% for exchange in exchanges %}
+			<tr>
+				<td>{{exchange.applicant.username}}</td>
+				<td>{{exchange.applicant_card.name}}</td>
+				<td>{{exchange.validator.username}}</td>
+				<td>{{exchange.validator_card.name}}</td>
+				<td> <button class="btn btn-success">Oui</button> <button class="btn btn-danger">Non</button></td>
+			</tr>
+			{% endfor %}
+
+		</table>
+		<hr>
+
+		<h3>Mes demandes</h3>
+	</div>
+{% endblock %}

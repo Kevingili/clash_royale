@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Exchange{% endblock %}
+
+
+{% block content %}
+	<div class="container">
+		<form action="" method="post">
+			<h1>Echange</h1>
+			{% csrf_token %}
+
+			<h3>Mes cartes</h3>
+			<div class="form-group">
+				<select name="applicant_card" class="form-control">
+					<option></option>
+					{% for card in cards %}
+						<option value="{{card.id}}">{{card.name}}</option>
+					{% endfor %}			
+				</select>
+			</div>
+
+			<h3>Cartes du joueur XXXX</h3>
+			<div class="form-group">
+				<select name="validator_card" class="form-control">
+					<option></option>
+					{% for card_player in cards_player %}
+						<option value="{{card_player.id}}">{{card_player.name}}</option>
+					{% endfor %}
+				</select>
+			</div>
+
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary" value="Submit">Enregistrer</button>
+			</div>
+		</form>
+
+	</div>
+{% endblock %}

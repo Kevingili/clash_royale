@@ -13,23 +13,32 @@
     </style>
     <div class="row">
     	<div class="col">
-    		<h1>{{ user.username }}</h1>
+    		<h1>{{ player.username }}</h1> {% if user != player%} <a href="{% url 'exchange' player.id %}" class="btn btn-primary">Echanger</a> {% endif %}
     	</div>
     	<div class="col">
 			<h2 class="h1">Clan = Lorem</h2>
     	</div>
     </div>
 	<hr>
-	<h2>Deck actuel : <em>{{ user.deck.name }}</em></h2>
-	{% if user.deck.cards.all|length > 0 %}
+	<h2>Deck actuel : <em>{{ player.deck.name }}</em></h2>
+	{% if player.deck.cards.all|length > 0 %}
 		<p>
-			{% for card in user.deck.cards.all %}
+			{% for card in player.deck.cards.all %}
 				<img src="{{ card.url }} ">
 			{% endfor %}
 		</p>
 	{% else %}
-		<p>Ce joueur n'a pas encore créer de deck</p>
+		<p>Ce joueur n'a pas encore ajouter de cartes à son deck</p>
 	{% endif %}
+	<hr>
+
+	<h3>Liste des cartes</h3>
+		<p>
+			{% for card in cards %}
+				<img src="{{ card.url }} ">
+			{% endfor %}
+		</p>
+
 	<hr>
 	<h3>Historique des matchs</h3>
 	
