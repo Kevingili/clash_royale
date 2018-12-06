@@ -9,6 +9,7 @@ urlpatterns = [
     path('shop', views.show_shop, name='show_shop'),
     path('create', views.card_create, name='card_create'),
     path('exchange/<int:id_player>', views.exchange, name='exchange'),
+    path('doexchange/<int:id_exchange>/<int:status>', views.doexchange, name='doexchange'),
     path('exchange', views.exchange_list, name='exchange_list'),
     path('update/<int:id_card>', views.card_update, name='card_update'),
     path('delete/<int:id_card>', views.card_delete, name='card_delete'),

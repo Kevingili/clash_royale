@@ -6,28 +6,91 @@
 	<div class="container">
 		<h1>Liste des échanges</h1>
 
+		
+
 		<h3>Demandes</h3>
-		<table class="table table-bordered">
-			<tr>
-				<td>Applicant</td>
-				<td>Applicant carte</td>
-				<td>Validator</td>
-				<td>Validator carte</td>
-				<td>Action</td>
-			</tr>
-			{% for exchange in exchanges %}
-			<tr>
-				<td>{{exchange.applicant.username}}</td>
-				<td>{{exchange.applicant_card.name}}</td>
-				<td>{{exchange.validator.username}}</td>
-				<td>{{exchange.validator_card.name}}</td>
-				<td> <button class="btn btn-success">Oui</button> <button class="btn btn-danger">Non</button></td>
-			</tr>
-			{% endfor %}
-
-		</table>
+		{% if exchanges_other %}
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>Demandeur</th>
+						<th>Carte à recevoir</th>
+						<th>Validateur</th>
+						<th>Carte à donner</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>		
+					{% for exchange in exchanges_other %}
+					<tr>
+						<td>{{exchange.applicant.username}}</td>
+						<td>{{exchange.applicant_card.name}}</td>
+						<td>{{exchange.validator.username}}</td>
+						<td>{{exchange.validator_card.name}}</td>
+						<td> <a href="{% url 'doexchange' exchange.id 1 %}" class="btn btn-success">Oui</a> <button class="btn btn-danger">Non</button></td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		{% else %}
+			<p>Aucune demande d'échange en attente</p>
+		{% endif %}
 		<hr>
-
 		<h3>Mes demandes</h3>
+		{% if exchanges %}
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>Demandeur</th>
+						<th>Carte du demandeur</th>
+						<th>Validateur</th>
+						<th>Carte du validateur</th>
+					</tr>
+				</thead>
+				<tbody>		
+					{% for exchange in exchanges %}
+					<tr>
+						<td>{{exchange.applicant.username}}</td>
+						<td>{{exchange.applicant_card.name}}</td>
+						<td>{{exchange.validator.username}}</td>
+						<td>{{exchange.validator_card.name}}</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		{% else %}
+			<p>Aucune demande en attente</p>
+		{% endif %}
+		
+		<hr>
+		<h3>Echanges terminés</h3>
+		{% if exchanges_done %}
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>Demandeur</th>
+						<th>Carte du demandeur</th>
+						<th>Validateur</th>
+						<th>Carte du validateur</th>
+						<th>Status</th>
+					</tr>
+				</thead>
+				<tbody>		
+					{% for exchange in exchanges_done %}
+					<tr>
+						<td>{{exchange.applicant.username}}</td>
+						<td>{{exchange.applicant_card.name}}</td>
+						<td>{{exchange.validator.username}}</td>
+						<td>{{exchange.validator_card.name}}</td>
+						<td>{{exchange.status}}</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		{% else %}
+			<p>Aucun échange terminé</p>
+		{% endif %}
+		
+
 	</div>
 {% endblock %}

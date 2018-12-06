@@ -51,11 +51,42 @@ def exchange(request, id_player):
 		cards_player = player.card_set.all()
 		return render(request, 'exchange.html', {'cards': cards, 'cards_player': cards_player})
 
+
+@login_required
+def doexchange(request, id_exchange, status):
+
+	exchange = Exchange.objects.get(id=id_exchange)
+
+	card_applicant_id = exchange.applicant_id
+	card_applicant_to_add = exchange.validator_card_id
+	card_applicant_to_delete = exchange.applicant_card_id
+
+	card_validator_id = exchange.validator_id
+	#card_validator_to_add = exchange.applicant_card_id
+	#card_validator_to_delete = exchange.validator_card_id
+
+	applicant = MyUser.objects.get(id=card_applicant_id)
+	validator = MyUser.objects.get(id=card_validator_id)
+
+	card1 = Card.objects.get(id=card_applicant_to_add)
+	card1.users.add(applicant)
+	card1.users.remove(validator)
+
+	card2 = Card.objects.get(id=card_applicant_to_delete)
+	card2.users.add(validator)
+	card2.users.remove(applicant)
+
+	exchange.status = status
+	exchange.save()
+
+	return redirect('index')
+	
 @login_required
 def exchange_list(request):
-	exchanges = Exchange.objects.filter(applicant_id=request.user.id)
-	exchanges_other = Exchange.objects.filter(validator_id=request.user.id)
-	return render(request, 'exchange_list.html', {'exchanges': exchanges})
+	exchanges = Exchange.objects.filter(applicant_id=request.user.id).exclude(status=1)
+	exchanges_other = Exchange.objects.filter(validator_id=request.user.id).exclude(status=1)
+	exchanges_done = Exchange.objects.filter(status=1)
+	return render(request, 'exchange_list.html', {'exchanges': exchanges, 'exchanges_other': exchanges_other, 'exchanges_done': exchanges_done})
 
 
 def show_shop(request):
