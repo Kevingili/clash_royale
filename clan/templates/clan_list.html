@@ -4,6 +4,11 @@
 
 {% block content %}
 
-	<h1>Clan</h1>
-
+	<h1>Liste des clans</h1>
+	<ul>
+		{% for clan in clans %}
+			<li><a href="{% url 'show_clan' clan.id %}">{{ clan.name }}</a></li>
+		{% endfor %}
+	</ul>
+	
 {% endblock %}

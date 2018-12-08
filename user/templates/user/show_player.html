@@ -21,7 +21,7 @@
     	</div>
     	<div class="col">
     		{% if player.clan != null %}
-				<p class="h2"><img class="micro-img" src="https://statsroyale.com/images/clanwars/16000044_magical.png"> {{player.clan.name}}</p>
+				<p class="h2"><img class="micro-img" src="https://statsroyale.com/images/clanwars/16000044_magical.png"> <a href="{% url 'show_clan' player.clan.id %}">{{ player.clan.name }}</a></p>
 			{% else %}
 				<h2>Pas de clan</h2>
 			{% endif %}

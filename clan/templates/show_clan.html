@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Show Clan{% endblock %}
+
+{% block content %}
+
+	<h1>{{clan.name}}</h1>
+	<h3>Liste des membres</h3>
+	<ul>
+		{% for player in players %}
+			<li><a href="{% url 'show_player' player.id %}">{{ player.username }}</a></li>
+		{% endfor %}
+	</ul>
+	
+	
+{% endblock %}
