@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'user',
     'cards',
     'deck',
+    'clan',
     'bootstrap4',
     'crispy_forms',
     'django.contrib.admin',

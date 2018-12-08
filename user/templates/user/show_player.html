@@ -10,13 +10,21 @@
 		    max-width: 100px; 
 		    max-height: 100px;
 		}
+		.micro-img {
+		    max-width: 50px; 
+		    max-height: 50px;
+		}
     </style>
     <div class="row">
     	<div class="col">
     		<h1>{{ player.username }}</h1> {% if user != player%} <a href="{% url 'exchange' player.id %}" class="btn btn-primary">Echanger</a> {% endif %}
     	</div>
     	<div class="col">
-			<h2 class="h1">Clan = Lorem</h2>
+    		{% if player.clan != null %}
+				<p class="h2"><img class="micro-img" src="https://statsroyale.com/images/clanwars/16000044_magical.png"> {{player.clan.name}}</p>
+			{% else %}
+				<h2>Pas de clan</h2>
+			{% endif %}
     	</div>
     </div>
 	<hr>
