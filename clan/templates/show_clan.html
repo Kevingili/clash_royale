@@ -5,6 +5,21 @@
 {% block content %}
 
 	<h1>{{clan.name}}</h1>
+
+	{% if test %}
+		<form action="" method="post">
+			{% csrf_token %}
+			<input type="hidden" name="actionF" value="quitter">
+			<button class="btn btn-danger" type="submit">Quitter le clan</button>
+		</form>
+	{% else %}
+		<form action="" method="post">
+			{% csrf_token %}
+			<input type="hidden" name="actionF" value="rejoindre">
+			<button class="btn btn-success" type="submit">Rejoindre le clan</button>
+		</form>
+	{% endif %}
+
 	<h3>Liste des membres</h3>
 	<ul>
 		{% for player in players %}
