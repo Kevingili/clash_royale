@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}List topics{% endblock %}
+
+{% block content %}
+	<a href="{% url 'forum_create' %}" class="btn btn-primary">Créer un topic</a>
+	<h1>Liste des topics</h1>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Titre</th>
+				<th>Par</th>
+				<th>Le</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for topic in topics %}
+			<tr>
+				<td><a href="{% url 'forum_show' topic.id %}">{{topic.title}}</a></td>
+				<td>{{topic.user}}</td>
+				<td>XXXX</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+		
+	</table>
+{% endblock %}

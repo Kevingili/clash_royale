@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Show Topic{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+	<h1>{{ topic.title }}</h1>
+	<hr>
+	<p><strong>{{ topic.user }}</strong> <i>(hh:mm)</i> : {{ topic.description }}</p>
+	<hr>
+
+	{% for comment in comments %}
+		<p><strong>{{ comment.user }}</strong> <i>(hh:mm)</i> : {{ comment.content }}</p>
+		<hr>
+	{% endfor %}
+
+	<form method="post">{% csrf_token %}
+	    <div class="form-group">
+			{{ form.content|as_crispy_field}}
+		</div>
+		<div class="form-group" style="display: none;">
+			{{ form.user|as_crispy_field}}
+		</div>
+		<div class="form-group" style="display: none;">
+			{{ form.topic|as_crispy_field}}
+		</div>
+	    <button type="submit" class="btn btn-primary" value="Submit">Répondre</button>
+	</form>
+	<br>
+{% endblock %}
