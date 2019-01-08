@@ -43,7 +43,7 @@ def deck_create(request):
 			form = DeckForm(request.POST)
 			if form.is_valid():
 				form.save()
-				return redirect('deck_list')
+				return redirect('index')
 		else:
 			#form = DeckForm()
 			form = DeckForm()

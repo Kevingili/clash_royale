@@ -5,5 +5,5 @@ from clan.models import Clan
 from django.contrib.auth.models import AbstractUser
 
 class MyUser(AbstractUser):
-    gold = models.IntegerField(default=500)
+    gold = models.IntegerField(default=800)
     clan = models.ForeignKey(Clan, null=True, on_delete=models.CASCADE)
