@@ -14,4 +14,16 @@
 	<h1>{{ card.name }}</h1>
 	<img src="{{ card.url }}">
 	<p>{{ card.description }}</p>
+	
+	{% if card.tag == 1%}
+		<p>commune</p>	
+	{% elif card.tag == 2 %}
+		<p>rare</p>
+	{% elif card.tag == 3 %}
+		<p>épique</p>
+	{% elif card.tag == 4 %}
+		<p>légendaire</p>
+	{% else %}
+		<p>non défini</p>
+	{% endif %}
 {% endblock %}
