@@ -6,7 +6,7 @@
 
 {% block content %}
 
-	<h1>{{action}} Créer un topic</h1>
+	<h1>Créer un topic</h1>
 	<form method="post">{% csrf_token %}
 	    {{ form|crispy}}
 	    <button type="submit" class="btn btn-primary" value="Submit">Enregistrer</button>

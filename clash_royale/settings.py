@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'deck',
     'clan',
     'forum',
+    'match',
     'bootstrap4',
     'crispy_forms',
     'django.contrib.admin',

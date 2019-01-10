@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block title %}Match n°{{match.id}}{% endblock %}
+
+{% block content %}
+    <style type="text/css">
+    	img {
+		    height: auto; 
+		    width: auto; 
+		    max-width: 150px; 
+		    max-height: 150px;
+		}
+    </style>
+
+	<h1>Match n°{{match.id}}</h1>
+	<hr>
+	<h2>{{match.player1}} {{match.points_player1}} - {{match.points_player2}} {{match.player2}}</h2>
+
+		{% if match.statut == 1 %}
+			<span class="badge badge-warning">Match en cours</span><br><br>
+		{% elif match.statut == 2 %}
+			<span class="badge badge-success">Match fini</span><br><br>
+		{% elif match.statut == 3 %}
+			<span class="badge badge-danger">Refusé</span><br><br>
+		{% endif %}
+
+		{% if match.statut != 0 and match.statut != 3 %}
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Tour n°</th>
+					<th>Gili</th>
+					<th>Python</th>
+					<th>Gagnant</th>
+					<th>Statut</th>
+				</tr>
+			</thead>
+			<tbody>
+				
+				{% for turn in turns %}
+					<tr>
+						<td> {{ forloop.counter }} </td>
+						<td>{{turn.play_player1.name}}</td>
+						<td>{{turn.play_player2.name}}</td>
+						<td>
+							{% if turn.winner_turns == 1 %}
+								{{match.player1}}
+							{% elif turn.winner_turns == 2 %}
+								{{match.player2}}
+							{% elif turn.winner_turns == 3 %}
+								<span class="badge badge-primary">égalité</span>
+							{% else %}
+								<span class="badge badge-primary">???</span>
+							{% endif %}
+						</td>
+						<td>
+							{% if turn.statut == 0 %}
+								<span class="badge badge-warning">en cours</span>
+							{% else %}
+								<span class="badge badge-success">fini</span>
+							{% endif %}
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+		{% if match.nb_plays <= 4  %}
+			<p>Veuillez choisir une carte</p>
+			<form action="{% url 'match_show' match.id %}" method="post">
+				{% csrf_token %}
+				<select name="play" class="form-control">
+					<option value=""></option>
+					{% for card in deck.cards.all %}
+						<option value="{{card.id}}">{{ card.name }}</option>
+					{% endfor %}
+				</select>
+				<br>
+				<button class="btn btn-primary">Jouer</button>
+			</form>
+		{% endif %}
+
+		{% endif %}
+
+
+	{% if user == match.player1 and match.statut == 0 %}
+		<span class="badge badge-primary">En attente de {{match.player2}}...</span>
+	{% endif %}
+
+	{% if user == match.player2 and match.statut == 0 %}
+		<a href="http://127.0.0.1:8000/match/edit/{{match.id}}/statut/1" class="btn btn-success">Accepter le combat !</a> - 
+		<a href="http://127.0.0.1:8000/match/edit/{{match.id}}/statut/3" class="btn btn-danger">Refuser le combat !</a>
+	{% endif %}
+
+
+
+{% endblock %}

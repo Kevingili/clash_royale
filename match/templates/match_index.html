@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Match Index{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+	<h1>Match Index</h1>
+
+	<a href="{% url 'match_create' %}" class="btn btn-primary">Affronter quelqu'un !</a><br><br>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Joueurs</th>
+				<th>Statut</th>
+				<th>Score</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for match in matchs %}
+			<tr>
+				<td><a href="{% url 'match_show' match.id %}">{{match.id}}</a></td>
+				<td>{{match.player1}} vs {{match.player2}}</td>
+				<td>
+					{% if match.statut == 0 %}
+						<span>pas encore accepter</span>
+					{% elif match.statut == 1 %}
+						<span class="badge badge-warning">en cours !</span>
+					{% elif match.statut == 2 %}
+						<span class="badge badge-success">fini</span>
+					{% elif match.statut == 3 %}
+						<span class="badge badge-danger">refusé</span>
+					{% endif %}
+				</td>
+				<td>{{match.points_player1}} - {{match.points_player2}}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	
+{% endblock %}

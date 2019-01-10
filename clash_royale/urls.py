@@ -5,6 +5,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('user.urls')),
     path('cards/', include('cards.urls')),
+    path('match/', include('match.urls')),
     path('decks/', include('deck.urls')),
     path('forum/', include('forum.urls')),
     path('clan/', include('clan.urls')),

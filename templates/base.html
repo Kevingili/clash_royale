@@ -40,7 +40,7 @@
 
           {% if user.is_authenticated %}
           <li class="nav-item">
-            <a class="nav-link" href="#">Jouer</a>
+            <a class="nav-link" href="{% url 'match_index' %}">Jouer</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'show_shop' %}">Shop</a>
