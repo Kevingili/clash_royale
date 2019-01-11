@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from user.models import MyUser
 from django.contrib.auth.decorators import login_required
 from .forms import MyCustomUserForm
+from match.models import Match
 
 def index(request):
 	if not request.user.is_authenticated:
@@ -40,7 +41,8 @@ def user_list(request):
 def show_player(request, id_user):
 	player = MyUser.objects.get(id=id_user)
 	cards = player.card_set.all()
-	return render(request, 'user/show_player.html', {'player': player, 'cards': cards})
+	matchs = matchs = Match.objects.all().filter(player1_id=id_user)
+	return render(request, 'user/show_player.html', {'player': player, 'cards': cards, 'matchs': matchs})
 
 @login_required
 def my_account(request):
