@@ -18,3 +18,6 @@ Then you can :
 * You can create and join clans
 * You can discuss in forum section
 * You can play against other users
+* See profil of users
+* Exchange cards with other users
+* May be more in future !
